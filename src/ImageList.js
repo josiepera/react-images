@@ -26,6 +26,7 @@ class ImageList extends Component{
     url: '',
     thumbnailUrl: '',
     images: [],
+    
     }
 
   componentDidMount(){
