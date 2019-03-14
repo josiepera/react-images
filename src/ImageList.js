@@ -13,9 +13,17 @@ class ImageList extends Component{
     images: [],
     currentPage: 1,
     imagesPerPage: 10,
-    count: 0
+    count: 0,
+    val: 0,
+    tag: 'Like'
     }
 
+    update(){
+       this.setState({
+         val:  this.state.val === 0 ? 1 : this.state.val -1 ,
+         tag: this.state.val === 0 ? 'Unlike' : 'Like'
+       })
+   }
 
     incrementCount(){
       this.setState((prevState) => ({

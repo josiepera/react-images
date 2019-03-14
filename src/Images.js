@@ -5,7 +5,14 @@ import Popup from "reactjs-popup";
 
 class Images extends Component{
   state={
-    show: false
+    show: false,
+    condition: false
+  }
+
+  handleClick() {
+    this.setState({
+      condition: !this.state.condition
+    });
   }
 
   toggleInfo = () => {
@@ -18,15 +25,12 @@ class Images extends Component{
     return(
       <div>
 
-        <div className="like-btn" onClick={this.toggleInfo.bind(this)}>
-          <button onClick={this.props.onClick}>Like
-          </button>
+        <div onClick={ this.handleClick.bind(this) } className= { this.state.condition ? "button toggled" : "button" }>
+          <div onClick={this.props.onClick}>Like
+          </div>
         </div>
 
-        {this.state.show &&
-          <button id="unlike"onClick={this.props.onClick}>unlike
-          </button>
-        }
+
           <div className="images">
             <Popup trigger={
               <img src={this.props.images.thumbnailUrl} alt={this.props.images.title}/>
