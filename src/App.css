@@ -23,6 +23,36 @@
   color: #61dafb;
 }
 
+html, body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1.2em;
+}
+
+#page-numbers {
+  list-style: none;
+  display: flex;
+}
+
+#page-numbers > li {
+  margin-right: 0.3em;
+  color: blue;
+  user-select: none;
+  cursor: pointer;
+}
+
+.images{
+  border: 3px solid white;
+  height:150px;
+  width:150px;
+  margin: 20px;
+}
+.images:hover{
+  border: 3px solid black;
+  cursor: pointer;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

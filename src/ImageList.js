@@ -1,23 +1,8 @@
 import React, { Component } from 'react';
-import Images from './Images'
+import Images from './Images';
 
-// renderImages = async (e) => {
-//   e.preventDefault()
-//   const apiCall = await fetch(`https://jsonplaceholder.typicode.com/photos`)
-//   const data = await apiCall.json()
-//     let images = data.map(d => {
-//       return({
-//         albumId: d.albumId,
-//         id: d.id,
-//         title: d.title,
-//         url: d.url,
-//         thumbnailUrl: d.thumbnailUrl
-//       })
-//     })
-//     this.setState(prevState => ({
-//       images
-//   }))
-// }
+
+
 class ImageList extends Component{
   state = {
     albumId: '',
@@ -26,8 +11,16 @@ class ImageList extends Component{
     url: '',
     thumbnailUrl: '',
     images: [],
-    
+    currentPage: 1,
+    imagesPerPage: 10
     }
+
+  handleClick(event){
+
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
 
   componentDidMount(){
     fetch(`https://jsonplaceholder.typicode.com/photos`)
@@ -52,15 +45,45 @@ class ImageList extends Component{
 
 
   render(){
-    const showImages = this.state.images.map((d, i) => {
+    const { images, currentPage, imagesPerPage } = this.state;
+
+    const indexOfLastImage = currentPage * imagesPerPage;
+    const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+    const currentImages = images.slice(indexOfFirstImage, indexOfLastImage);
+
+
+    const showImages = currentImages.map((d, i) => {
       return <Images images={d} />
     })
-    // console.log(showImages)
-    return(
-        <div>
-          {showImages}
-        </div>
 
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(images.length / 10); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={(e) => this.handleClick(e)}
+        >
+          {number}
+        </li>
+      );
+    });
+
+    return(
+    <>
+      <div>
+        <ul>
+          {showImages}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
+      </div>
+    </>
     );
   }
 }
