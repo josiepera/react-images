@@ -72,6 +72,9 @@ html, body {
 .content img{
   margin:auto;
 }
+#unlike{
+  
+}
 
 #image-container{
   display:flex;

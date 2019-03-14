@@ -4,18 +4,33 @@ import Popup from "reactjs-popup";
 
 
 class Images extends Component{
+  state={
+    show: false
+  }
 
+  toggleInfo = () => {
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+  }
   render(){
 
     return(
-      <>
-          <p>{this.props.count}</p>
-          <button onClick={this.props.incrementCount}>
+      <div>
+
+        <div className="like-btn" onClick={this.toggleInfo.bind(this)}>
+          <button onClick={this.props.onClick}>Like
           </button>
+        </div>
+
+        {this.state.show &&
+          <button id="unlike"onClick={this.props.onClick}>unlike
+          </button>
+        }
           <div className="images">
             <Popup trigger={
               <img src={this.props.images.thumbnailUrl} alt={this.props.images.title}/>
-              }>
+            }>
               {close => (
                 <div className="content">
                   <a className="close" onClick={close}>&times;</a>
@@ -27,7 +42,7 @@ class Images extends Component{
           </div>
 
 
-      </>
+      </div>
     );
   }
 }

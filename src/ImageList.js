@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Images from './Images';
-
+import Popup from "reactjs-popup";
 
 
 class ImageList extends Component{
@@ -18,11 +18,18 @@ class ImageList extends Component{
 
 
     incrementCount(){
-
       this.setState((prevState) => ({
-      	   count: prevState.count + 1
-        }));
+        count: prevState.count + 1
+      }));
     }
+
+    decrementCount(){
+      this.setState({
+        count: this.state.count - 1
+      });
+  }
+
+
 
   handleClick(event){
 
@@ -65,7 +72,7 @@ class ImageList extends Component{
 
 
     const showImages = currentImages.map((d, i) => {
-      return <Images images={d} onClick={this.incrementCount.bind(this)}/>
+      return <Images images={d} count={this.state.count} onClick={this.incrementCount.bind(this)} />
     })
 
     const pageNumbers = [];
@@ -87,19 +94,22 @@ class ImageList extends Component{
 
     return(
     <>
-      <h2>{this.state.count}</h2>
-
-      <button onClick={this.incrementCount.bind(this)}>
-      +
-      </button>
+      <h2>{this.state.count} Liked Images</h2>
       <div>
-        <ul id="image-container">
-          {showImages}
-        </ul>
+
+                <ul id="image-container">
+                  {showImages}
+                </ul>
+
+
+
         <ul id="page-numbers">
           {renderPageNumbers}
         </ul>
       </div>
+
+
+
     </>
     );
   }
