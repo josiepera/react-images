@@ -51,6 +51,41 @@ html, body {
   border: 3px solid black;
   cursor: pointer;
 }
+.close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.content{
+  height: 250px;
+  width:250px;
+}
+.content img{
+  margin:auto;
+}
+
+#image-container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#red {
+  background: red;
+}
+
+#white {
+  background: white;
+}
 
 
 @keyframes App-logo-spin {

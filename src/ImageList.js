@@ -12,7 +12,16 @@ class ImageList extends Component{
     thumbnailUrl: '',
     images: [],
     currentPage: 1,
-    imagesPerPage: 10
+    imagesPerPage: 10,
+    count: 0
+    }
+
+
+    incrementCount(){
+
+      this.setState((prevState) => ({
+      	   count: prevState.count + 1
+        }));
     }
 
   handleClick(event){
@@ -44,7 +53,10 @@ class ImageList extends Component{
 
 
 
+
   render(){
+
+
     const { images, currentPage, imagesPerPage } = this.state;
 
     const indexOfLastImage = currentPage * imagesPerPage;
@@ -53,7 +65,7 @@ class ImageList extends Component{
 
 
     const showImages = currentImages.map((d, i) => {
-      return <Images images={d} />
+      return <Images images={d} onClick={this.incrementCount.bind(this)}/>
     })
 
     const pageNumbers = [];
@@ -75,8 +87,13 @@ class ImageList extends Component{
 
     return(
     <>
+      <h2>{this.state.count}</h2>
+
+      <button onClick={this.incrementCount.bind(this)}>
+      +
+      </button>
       <div>
-        <ul>
+        <ul id="image-container">
           {showImages}
         </ul>
         <ul id="page-numbers">
